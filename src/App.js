@@ -15,10 +15,7 @@ function App() {
   };
   return (
     <div className="form-container" style={divStyle} >
-      <header >
-       <h1 className="header-container ">Stay Updated !</h1>
-      </header >
-        <SubHeader />
+      
         <Input />
        
     </div>
