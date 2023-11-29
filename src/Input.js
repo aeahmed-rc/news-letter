@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./style.css";
 import Button from "./Button";
+import Success from "./Success";
 const Input = () => {
   const [inputData, setInputData] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
@@ -41,7 +42,12 @@ const Input = () => {
       {isSubmitted && (
         <p style={{ color: "Green" }}>Thank you for registering!</p>
       )}
+      {isSubmitted && (
+        <Success email={inputData}/>
+      )}
+    
     </form>
+  
   );
 };
 export default Input;
