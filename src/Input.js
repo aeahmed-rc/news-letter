@@ -3,6 +3,7 @@ import "./style.css";
 import Button from "./Button";
 import Success from "./Success";
 import SubHeader from "./SubHeader";
+import Failure from "./FailureInput";
 const Input = () => {
   const [inputData, setInputData] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
@@ -10,32 +11,35 @@ const Input = () => {
   const handleChange = (e) => {
     const emailAddress = e.target.value;
     setInputData(emailAddress);
-    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailAddress);
-    setIsValidEmail(isValid);
+    
   };
 
   const handleSubmit = (e) => {
+    console.log('hr')
     e.preventDefault();
+    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputData);
+    console.log(isValid)
+    setIsValidEmail(isValid);
     if (isValidEmail) {
       // Process the form data, e.g., send it to a server
       console.log("Valid email:", inputData);
       setIsSubmitted(true);
     } else {
-      console.log("Invalid email address");
+      console.log(isSubmitted);
+      setIsSubmitted(false);
     }
   };
   return (
     <div>
-    {isSubmitted ? (
+    {isSubmitted &&isValidEmail? (
         <div>
             <Success email={inputData}/>
             </div>
         
       ):(
-    
     <form onSubmit={handleSubmit} >
     <header >
-       <h1 className="header-container ">Stay Updated !</h1>
+       <h1 className="header-container "> Stay Updated !</h1>
       </header >
     <SubHeader/>
       <label>
@@ -46,10 +50,11 @@ const Input = () => {
           onChange={handleChange}
           required
           className="input-field"
-        />
+        /> 
       </label>
+      
       <div>
-     
+    
       <Button type="submit" label="Subscribe to" buttonStyle={'submit-button'}/>
       </div>
       {!isValidEmail && <p style={{ color: "red" }}>Invalid email address</p>}
